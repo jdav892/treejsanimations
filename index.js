@@ -1,4 +1,6 @@
 import * as THREE from "three"
+import { OrbitControls } from "jsm/controls/OrbitControls.js";
+
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -14,9 +16,11 @@ const near = 0.1;
 const far = 10;
 const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
 camera.position.z = 2; //to move camera back a bit more
-
 const scene = new THREE.Scene();
 
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true
+controls.dampingFactor = 0.03;
 
 const geo = new THREE.IcosahedronGeometry(1.0, 2); //primitves in Threejs library
 const mat = new THREE.MeshStandardMaterial({
@@ -36,7 +40,7 @@ wireMesh.scale.setScalar(1.001);
 //adds wiremesh to child of mesh
 mesh.add(wireMesh);
 
-const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000);
+const hemiLight = new THREE.HemisphereLight(0x0099ff, 0xaa5500);
 //to change lighting of object
 scene.add(hemiLight);
 
@@ -44,8 +48,10 @@ function animate(t = 0){
 //animates object
     requestAnimationFrame(animate);
 //rotation over y axis with speed modifier
-    mesh.rotation.y = t * 0.0001;
+    //mesh.rotation.y = t * 0.0001;
     renderer.render(scene, camera);
+    controls.update();
+
 }
 
 animate();
