@@ -17,12 +17,16 @@ controls.dampingFactor = .03;
 
 const loader = new THREE.TextureLoader();
 
+const earthGroup = new THREE.Group();
+earthGroup.rotation.z = -23.4 * Math.PI / 100;
+scene.add(earthGroup)
+
 const geometry = new THREE.IcosahedronGeometry(1, 12);
 const material = new THREE.MeshStandardMaterial({
-    //map: loader.load("./assets/textures/earthlights1k.jpg")
+    map: loader.load("./assets/textures/8k_earth_nightmap.jpg")
     //map: loader.load("./assets/textures/moonmap4k.jpg")
     //map: loader.load("./assets/textures/earthmap1k.jpg")
-    map: loader.load("./assets/textures/8k_mars.jpg")
+    //map: loader.load("./assets/textures/8k_mars.jpg")
 });
 const earthMesh = new THREE.Mesh(geometry, material);
 scene.add(earthMesh);
