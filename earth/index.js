@@ -1,5 +1,5 @@
 import * as THREE from "three";
-//import { OrbitControls } from "jsm/controls/OrbitControls.js"
+import { OrbitControls } from "jsm/controls/OrbitControls.js"
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -10,7 +10,9 @@ const renderer = new THREE.WebGLRenderer();
 renderer.setSize(w, h);
 document.body.appendChild(renderer.domElement);
 
-
+const controls = new OrbitControls(camera, renderer.domElement);
+controls.enableDamping = true
+controls.dampingFactor = .03;
 
 const geometry = new THREE.BoxGeometry();
 const material = new THREE.MeshStandardMaterial({
