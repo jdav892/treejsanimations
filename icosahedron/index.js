@@ -20,7 +20,7 @@ const scene = new THREE.Scene();
 
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true
-controls.dampingFactor = 0.03;
+controls.dampingFactor = .02;
 
 const geo = new THREE.IcosahedronGeometry(1.0, 5); //primitves in Threejs library
 const mat = new THREE.MeshStandardMaterial({
@@ -48,7 +48,7 @@ function animate(t = 0){
 //animates object
     requestAnimationFrame(animate);
 //rotation over y axis with speed modifier
-    mesh.rotation.y = t * 0.0005;
+    mesh.rotation.y = t * 0.0002;
     renderer.render(scene, camera);
     controls.update();
 
