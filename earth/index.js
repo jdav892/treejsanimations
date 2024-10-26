@@ -1,6 +1,7 @@
 import * as THREE from "three";
 import { OrbitControls } from "jsm/controls/OrbitControls.js"
 import makeStarfield from "./assets/src/makeStarfield.js"
+import { getFresnelMat } from "./assets/src/getFresnelMat.js";
 
 const w = window.innerWidth;
 const h = window.innerHeight;
@@ -10,6 +11,10 @@ camera.position.z = 5;
 const renderer = new THREE.WebGLRenderer({ antialias: true });
 renderer.setSize(w, h);
 document.body.appendChild(renderer.domElement);
+//tone allows for better tones of blue
+renderer.toneMapping = THREE.ACESFilmicToneMapping;
+renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
+
 
 //controls shape movement with cursor
 const controls = new OrbitControls(camera, renderer.domElement);
@@ -42,14 +47,21 @@ const lightsMat = new THREE.MeshBasicMaterial({
 
 const cloudsMat = new THREE.MeshStandardMaterial({
     map: loader.load("./assets/textures/earthclouds1.jpg"),
-    //transparent: true,
-    opacity: 0.4,
+    transparent: true,
+    opacity: 0.6,
     blending: THREE.AdditiveBlending,
+    //alphaMap: loader.load('./asset/textures/05_cloudmaptrans.jpg')
 })
 
 const cloudsMesh = new THREE.Mesh(geometry, cloudsMat)
-cloudsMesh.scale.setScalar(1.01);
+cloudsMesh.scale.setScalar(1.003);
 earthGroup.add(cloudsMesh);
+
+const fresnelMat = getFresnelMat();
+const glowMesh = new THREE.Mesh(geometry, fresnelMat);
+glowMesh.scale.setScalar(1.01)
+earthGroup.add(glowMesh)
+
 
 const lightsMesh = new THREE.Mesh(geometry, lightsMat);
 earthGroup.add(lightsMesh)
@@ -71,6 +83,8 @@ function animate(){
     earthMesh.rotation.y += 0.001
     lightsMesh.rotation.y += 0.001
     cloudsMesh.rotation.y += 0.001
+    glowMesh.rotation.y += 0.001
+    stars.rotation.y -= 0.0002
     renderer.render(scene, camera)
 }
 animate();
