@@ -20,7 +20,16 @@ const points = spline.getPoints(100);
 const geometry = new THREE.BufferGeometry().setFromPoints(points);
 const material = new THREE.LineBasicMaterial({color: 0xff0000});
 const line = new THREE.Line(geometry, material);
-scene.add(line);
+//scene.add(line);
+const tubeGeo = new THREE.TubeGeometry(spline, 222, 0.65, 16, true);
+const tubeMat = new THREE.MeshStandardMaterial({
+    color: 0x0099ff,
+    side: THREE.DoubleSide,
+    wireframe: true,
+});
+
+const tube = new THREE.Mesh(tubeGeo, tubeMat);
+scene.add(tube);
 
 const hemiLight =  new THREE.HemisphereLight(0xfff);
 scene.add(hemiLight);
