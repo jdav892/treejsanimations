@@ -19,7 +19,7 @@ controls.dampingFactor = .03;
 
 const points = spline.getPoints(100);
 const geometry = new THREE.BufferGeometry().setFromPoints(points);
-const material = new THREE.LineBasicMaterial({color: 0xff0000});
+const material = new THREE.LineBasicMaterial({color: 0xffffff});
 const line = new THREE.Line(geometry, material);
 //scene.add(line);
 
@@ -34,7 +34,7 @@ const tube = new THREE.Mesh(tubeGeo, tubeMat);
 //scene.add(tube);
 
 const edges = new THREE.EdgesGeometry(tubeGeo, .2);
-const lineMat = new THREE.LineBasicMaterial({ color: 0x000000 });
+const lineMat = new THREE.LineBasicMaterial({ color: 0xff });
 const tubeLines = new THREE.LineSegments(edges, lineMat);
 scene.add(tubeLines);
 
