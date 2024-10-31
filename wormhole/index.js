@@ -6,7 +6,7 @@ import spline from "./spline.js";
 const w = window.innerWidth;
 const h = window.innerHeight;
 const scene = new THREE.Scene();
-scene.fog = new THREE.FogExp2(0x000000, 0.3);
+scene.fog = new THREE.FogExp2(0xff0000, 0.3);
 const camera = new THREE.PerspectiveCamera(75, w/h, 0.1, 1000);
 camera.position.z = 5;
 const renderer = new THREE.WebGLRenderer({ antialias: true });
@@ -34,7 +34,7 @@ const tube = new THREE.Mesh(tubeGeo, tubeMat);
 //scene.add(tube);
 
 const edges = new THREE.EdgesGeometry(tubeGeo, .2);
-const lineMat = new THREE.LineBasicMaterial({ color: 0xffffff });
+const lineMat = new THREE.LineBasicMaterial({ color: 0x000000 });
 const tubeLines = new THREE.LineSegments(edges, lineMat);
 scene.add(tubeLines);
 
@@ -58,7 +58,7 @@ for (let i = 0; i < numBoxes; i++){
     );
     box.rotation.set(rote.x, rote.y, rote.z);
     const edges = new THREE.EdgesGeometry(boxGeo, .2);
-    const lineMat = new THREE.LineBasicMaterial({ color: 0xffff00 });
+    const lineMat = new THREE.LineBasicMaterial({ color: 0xff });
     const boxLines = new THREE.LineSegments(edges, lineMat);
     boxLines.position.copy(pos);
     boxLines.rotation.set(rote.x, rote.y, rote.z);
