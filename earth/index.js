@@ -15,7 +15,6 @@ document.body.appendChild(renderer.domElement);
 renderer.toneMapping = THREE.ACESFilmicToneMapping;
 renderer.outputColorSpace = THREE.LinearSRGBColorSpace;
 
-
 //controls shape movement with cursor
 const controls = new OrbitControls(camera, renderer.domElement);
 controls.enableDamping = true
@@ -47,8 +46,7 @@ const lightsMat = new THREE.MeshBasicMaterial({
 
 const cloudsMat = new THREE.MeshStandardMaterial({
     map: loader.load("./assets/textures/earthclouds1.jpg"),
-    transparent: true,
-    opacity: 0.6,
+    transparent: true, opacity: 0.6,
     blending: THREE.AdditiveBlending,
     //alphaMap: loader.load('./asset/textures/05_cloudmaptrans.jpg')
 })
